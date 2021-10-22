@@ -12,6 +12,7 @@ django-cors-headers = "*"
 djoser = "*"
 djangorestframework = "*"
 stripe = "*"
+django-rest-framework = "*"
 
 [dev-packages]
 
