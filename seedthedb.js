@@ -2,7 +2,7 @@ require('dotenv').config()
 const mongoose = require('mongoose')
 const mongoURI = process.env.DB_URI
 const db = mongoose.connection;
-const Event = require('./models/event')
+const Event = require('./models/Event')
 
 
 mongoose.connect(mongoURI, {
@@ -54,6 +54,7 @@ const seedEvents = [
     }
 ]
 
+// probably should have used insert many but this worked so who cares
 Event.create(seedEvents , (error, event) => {
     if (error) { // if there is an error console log it
         console.log(error);

@@ -2,6 +2,8 @@
 const mongoose = require('mongoose')
 // shorthand for schema constructor
 const Schema = mongoose.Schema
+// initialize slug gener8r
+// mongoose.plugin(slug)
 
 // create event schema
 const eventSchema = new Schema({
@@ -10,10 +12,11 @@ const eventSchema = new Schema({
     dateandtime: String,
     description: String,
     entrants: { type: Number, default: 0 },
-}, { timestamps: true });
+    // slug: {type: String, slug: 'name'}
+}, { timestamps: true })
 
 // create event model
-const Event = mongoose.model('Event', eventSchema);
+const Event = mongoose.model('Event', eventSchema)
 
 // export model
-module.exports = Event;
+module.exports = Event
