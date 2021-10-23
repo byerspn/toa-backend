@@ -1,29 +1,43 @@
 const express = require('express')
+
 const router = express.Router()
 const Event = require('../models/Event')
 
 // show all. maybe add paginationlater
-app.get('/events', (req, res) => {
+router.get('/', (req, res, next) => {
     Event.find({})
         .then(events => res.json(events))
         .catch(next)
 })
 
 // show one
-app.get('/events/:id', (req, res) => {
+router.get('/:id', (req, res, next) => {
     Event.findById(req.params.id)
-        .then(events => res.json(events))
+        .then(event => res.json(event))
         .catch(next)
 })
 
-app.get('/events', (req, res) => {
-    Event.find({})
-        .then(events => res.json(events))
+// create one
+router.post('/', (req, res, next) => {
+    Event.create(req.body)
+        .then(event => res.json(event))
         .catch(next)
 })
 
-app.get('/events', (req, res) => {
-    Event.find({})
-        .then(events => res.json(events))
+// update one
+router.put('/:id', (req, res, next) => {
+    Event.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
+        .then(updatedEvent => res.json(updatedEvent))
         .catch(next)
 })
+
+// delete one
+router.delete('/:id', (req, res, next) => {
+    Event.findOneAndDelete({ _id: req.params.id })
+        .then(deletedEvent => res.json(deletedEvent))
+        .catch(next)
+})
+
+
+
+module.exports = router

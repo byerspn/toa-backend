@@ -24,11 +24,10 @@ db.on('error', (err) => console.log(err.message + ' is Mongod running?'))
 db.on('connected', () => console.log('mongo connected'))
 db.on('disconnected', () => console.log('mongo disconnected'))
 
-app.get('/', (req, res) => {
-    Event.find({})
-        .then(events => res.json(events))
-        .catch(next)
-})
+
+// CONTROLLERS ////////////////////////////////////////////////
+const eventsController = require('./controllers/events')
+app.use('/events', eventsController)
 
 app.listen(PORT, () => {
     console.log('app listening on port ' + PORT)
