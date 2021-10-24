@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require('express')
+const cors = require('cors')
 const mongoose = require('mongoose')
 const app = express()
 const PORT = process.env.PORT || 8000
@@ -7,6 +8,8 @@ const mongoURI = process.env.DB_URI
 const db = mongoose.connection;
 const Event = require('./models/Event')
 
+// cors
+app.use(cors())
 
 // parse requests to js objects
 app.use(express.json())
