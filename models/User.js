@@ -3,8 +3,14 @@ const mongoose = require('mongoose')
 // shorthand for schema constructor
 const Schema = mongoose.Schema
 
+// user schema
 const userSchema = new Schema(
     {
+        username: {
+            type: String,
+            required: true,
+            unique: true,
+        },
         email: {
             type: String,
             required: true,

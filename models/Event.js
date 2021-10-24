@@ -9,7 +9,15 @@ const eventSchema = new Schema({
     location: String,
     dateandtime: String,
     description: String,
-    entrants: { type: Number, default: 0 },
+    entrants: [{
+        type: Schema.Types.ObjectId, 
+        ref: 'User',
+    }],
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    }
 }, { timestamps: true })
 
 // create event model

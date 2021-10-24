@@ -31,6 +31,8 @@ db.on('disconnected', () => console.log('mongo disconnected'))
 // CONTROLLERS ////////////////////////////////////////////////
 const eventsController = require('./controllers/events')
 app.use('/events', eventsController)
+const usersController = require('./controllers/users')
+app.use('/users', usersController)
 
 app.listen(PORT, () => {
     console.log('app listening on port ' + PORT)
