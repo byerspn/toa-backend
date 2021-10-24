@@ -56,12 +56,10 @@ const seedEvents = [
 
 // probably should have used insert many but this worked so who cares
 Event.create(seedEvents , (error, event) => {
-    if (error) { // if there is an error console log it
-        console.log(error);
-    } else { // else show us the created tweet
-        console.log(event);
+    if (error) {
+        console.log(error)
+    } else {
+        console.log(event)
     }
-    // get control of terminal back
-    // you can also just use control-c
-    db.close();
+    db.close()
 })

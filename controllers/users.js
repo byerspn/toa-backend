@@ -10,14 +10,16 @@ router.post('/signup', (req, res, next) => {
         .hash(req.body.password, 10)
         .then(hash =>
             ({
-            email: req.body.email,
-            password: hash
+                username: req.body.username,
+                email: req.body.email,
+                phone: req.body.phone,
+                password: hash
             })
         )
         .then(user => User.create(user))
         .then(user => res.status(201).json(user))
-        .catch(next);
-    });
+        .catch(next)
+    })
 
 // sign in
 router.post('/signin', (req, res, next) => {})
