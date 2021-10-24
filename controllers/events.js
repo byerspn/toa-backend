@@ -32,7 +32,7 @@ router.get('/:id', (req, res, next) => {
 // create one
 router.post('/', (req, res, next) => {
     Event.create(req.body)
-        .then(event => res.json(event))
+        .then(event => res.status(201).json(event))
         .catch(next)
 })
 
