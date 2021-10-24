@@ -19,6 +19,8 @@ router.get('/', (req, res, next) => {
 // show one
 router.get('/:id', (req, res, next) => {
     Event.findById(req.params.id)
+        .populate('entrants')
+        .populate('owner')
         .then(event => {
             if (!event) {
                 res.sendStatus(404)
