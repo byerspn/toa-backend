@@ -1,5 +1,7 @@
 const express = require('express')
 
+const { handleValidateId, handleRecordExists, } = require('../middleware/custom_errors ')
+
 const router = express.Router()
 const Event = require('../models/Event')
 
@@ -17,16 +19,13 @@ router.get('/', (req, res, next) => {
 })
 
 // show one
-router.get('/:id', (req, res, next) => {
+router.get('/:id', handleValidateId, (req, res, next) => {
     Event.findById(req.params.id)
         .populate('entrants')
         .populate('owner')
-        .then(event => {
-            if (!event) {
-                res.sendStatus(404)
-            } else {
-                res.json(event)
-            }
+        .then(handleRecordExists)
+        .then((event) => {
+            res.json(event)
         })
         .catch(next)
 })
@@ -39,31 +38,24 @@ router.post('/', (req, res, next) => {
 })
 
 // update one
-router.put('/:id', (req, res, next) => {
+router.put('/:id', handleValidateId, (req, res, next) => {
     Event.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
-        .then(updatedEvent => {
-            if (!updatedEvent) {
-                res.sendStatus(404)
-            } else {
-                res.json(updatedEvent)
-            }
+        .then(handleRecordExists)
+        .then((updatedEvent) => {
+            res.json(updatedEvent)
         })
         .catch(next)
 })
 
 // delete one
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', handleValidateId, (req, res, next) => {
     Event.findOneAndDelete({ _id: req.params.id })
-        .then(deletedEvent => {
-            if (!deletedEvent) {
-                res.sendStatus(404)
-            } else {
-                res.sendStatus(204)
-            }
+        .then(handleRecordExists)
+        .then((deletedEvent) => {
+            res.json(deletedEvent)
         })
         .catch(next)
 })
-
 
 
 module.exports = router

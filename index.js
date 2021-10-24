@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 8000
 const mongoURI = process.env.DB_URI
 const db = mongoose.connection;
 const Event = require('./models/Event')
+const { handleErrors, handleValidationErrors } = require('.middleware/custom_errors')
 
 // cors
 app.use(cors())
@@ -33,6 +34,9 @@ const eventsController = require('./controllers/events')
 app.use('/events', eventsController)
 const usersController = require('./controllers/users')
 app.use('/users', usersController)
+
+app.use(handleValidationErrors)
+app.use(handleErrors)
 
 app.listen(PORT, () => {
     console.log('app listening on port ' + PORT)
