@@ -39,11 +39,10 @@ router.post('/', requireToken, (req, res, next) => {
         .catch(next)
 })
 
-// update one
-router.put('/:id', handleValidateId, requireToken, (req, res, next) => {
+//register someone
+router.put('/:id/register', handleValidateId, (req, res, next) => {
     Event.findById(req.params.id)
         .then(handleRecordExists)
-        .then((event) => handleValidateOwnership(req, event))
         .then((event) => event.set(req.body).save())
         .then((event) => {
             res.json(event)
@@ -51,16 +50,12 @@ router.put('/:id', handleValidateId, requireToken, (req, res, next) => {
         .catch(next)
 })
 
-//register someone
-router.put('/:id/register', handleValidateId, requireToken, (req, res, next) => {
+// update one
+router.put('/:id', handleValidateId, requireToken, (req, res, next) => {
     Event.findById(req.params.id)
         .then(handleRecordExists)
-        .then((req, event) => {
-            regUserId = req.user._id
-            updatedEvent = { ...req.body }
-            updatedEvent.entrants.push(regUserId)
-            event.set(updatedEvent).save()
-        })
+        .then((event) => handleValidateOwnership(req, event))
+        .then((event) => event.set(req.body).save())
         .then((event) => {
             res.json(event)
         })
