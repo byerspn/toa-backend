@@ -36,6 +36,36 @@ const seedUsers = [
         phone: 3333333333,
         password: 'mepassword'
     },
+    {
+        username: 'fakeuser1',
+        email: 'fakeuser1@emaildomain.com',
+        phone: 8888888887,
+        password: 'fakeuser1password'
+    },
+    {
+        username: 'fakeuser2',
+        email: 'fakeuser2@emaildomain.com',
+        phone: 8888888886,
+        password: 'fakeuser2password'
+    },
+    {
+        username: 'fakeuser3',
+        email: 'fakeuser3@emaildomain.com',
+        phone: 8888888885,
+        password: 'fakeuser3password'
+    },
+    {
+        username: 'fakeuser4',
+        email: 'fakeuser4@emaildomain.com',
+        phone: 8888888884,
+        password: 'fakeuser4password'
+    },
+    {
+        username: 'fakeuser5',
+        email: 'fakeuser5@emaildomain.com',
+        phone: 8888888883,
+        password: 'fakeuser5password'
+    },
 ]
 
 hashedSeedUsers = seedUsers.map(seedUser => {
