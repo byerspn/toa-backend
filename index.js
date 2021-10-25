@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
+const passport = require('passport')
 const mongoose = require('mongoose')
 const app = express()
 const PORT = process.env.PORT || 8000
@@ -11,6 +12,7 @@ const { handleErrors, handleValidationErrors } = require('./middleware/custom_er
 
 // cors
 app.use(cors())
+app.use(passport.initialize())
 
 // parse requests to js objects
 app.use(express.json())

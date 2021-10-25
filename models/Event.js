@@ -12,6 +12,7 @@ const eventSchema = new Schema({
     entrants: [{
         type: Schema.Types.ObjectId, 
         ref: 'User',
+        unique: true,
     }],
     owner: {
         type: Schema.Types.ObjectId,
