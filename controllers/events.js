@@ -51,6 +51,22 @@ router.put('/:id', handleValidateId, requireToken, (req, res, next) => {
         .catch(next)
 })
 
+//register someone
+router.put('/:id/register', handleValidateId, requireToken, (req, res, next) => {
+    Event.findById(req.params.id)
+        .then(handleRecordExists)
+        .then((req, event) => {
+            regUserId = req.user._id
+            updatedEvent = { ...req.body }
+            updatedEvent.entrants.push(regUserId)
+            event.set(updatedEvent).save()
+        })
+        .then((event) => {
+            res.json(event)
+        })
+        .catch(next)
+})
+
 // delete one
 router.delete('/:id', handleValidateId, requireToken, (req, res, next) => {
     Event.findById(req.params.id)
